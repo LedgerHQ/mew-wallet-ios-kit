@@ -13,7 +13,7 @@ enum TransactionSignatureError: Error {
   case invalidSignature
 }
 
-internal struct TransactionSignature: CustomDebugStringConvertible {
+public struct TransactionSignature: CustomDebugStringConvertible {
   // swiftlint:disable identifier_name
   private(set) internal var r: RLPBigInt
   private(set) internal var s: RLPBigInt
@@ -33,7 +33,7 @@ internal struct TransactionSignature: CustomDebugStringConvertible {
     }
   }
 
-  init(signature: Data, chainID: BigInt? = nil, normalized: Bool = false) throws {
+  public init(signature: Data, chainID: BigInt? = nil, normalized: Bool = false) throws {
     guard signature.count == 65 else {
       throw TransactionSignatureError.invalidSignature
     }
@@ -54,7 +54,7 @@ internal struct TransactionSignature: CustomDebugStringConvertible {
   }
 
   // swiftlint:disable identifier_name
-  init(r: BigInt, s: BigInt, v: BigInt, chainID: BigInt? = nil, normalized: Bool = false) {
+  public init(r: BigInt, s: BigInt, v: BigInt, chainID: BigInt? = nil, normalized: Bool = false) {
     self.r = r.toRLP()
     self.s = s.toRLP()
     self.v = v.toRLP()
@@ -65,7 +65,7 @@ internal struct TransactionSignature: CustomDebugStringConvertible {
     }
   }
 
-  init(r: String, s: String, v: String, chainID: BigInt? = nil, normalized: Bool = false) throws {
+  public init(r: String, s: String, v: String, chainID: BigInt? = nil, normalized: Bool = false) throws {
     self.r = BigInt(Data(hex: r).bytes).toRLP()
     self.s = BigInt(Data(hex: s).bytes).toRLP()
     self.v = BigInt(Data(hex: v).bytes).toRLP()
@@ -115,7 +115,7 @@ internal struct TransactionSignature: CustomDebugStringConvertible {
 
   // MARK: - CustomDebugStringConvertible
 
-  var debugDescription: String {
+  public var debugDescription: String {
     var description = "Signature\n"
     description += "r: \(self.r.data.toHexString())\n"
     description += "s: \(self.s.data.toHexString())\n"

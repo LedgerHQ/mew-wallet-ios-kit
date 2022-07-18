@@ -38,8 +38,8 @@ public class Transaction: CustomDebugStringConvertible {
     return self._value.data
   }
   internal(set) public var data: Data
-  internal var signature: TransactionSignature?
-  internal var chainID: BigInt?
+  public var signature: TransactionSignature?
+  public var chainID: BigInt?
 
   internal(set) public var eipType: EIPTransactionType
 
